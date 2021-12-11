@@ -12,7 +12,7 @@ app.config['SECRET_KEY'] = "secret"
 socketio = SocketIO(app, async_mode='eventlet')
 
 zmqContext = zmq.Context()
-zmqSocket = context.socket(zmq.PUSH)
+zmqSocket = zmqContext.socket(zmq.PUSH)
 zmqSocket.connect("tcp://localhost:5555")
 
 
