@@ -14,7 +14,7 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-mode = 0
+mode = 3
 colour = 0
 colours = [ Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(127, 127, 127) ]
 customColour = [0,0,0]
