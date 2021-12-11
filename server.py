@@ -30,7 +30,7 @@ class Worker(object):
     worker = False
     switch = False
     unit_of_work = 0
-    speed = 0.5
+    speed = 0.2
     mode = 0
     r=50
     g=0
@@ -41,7 +41,7 @@ class Worker(object):
         assign socketio object to emit
         """
         self.socketio = socketio
-        self.pixels = neopixel.NeoPixel(board.D18, 50)
+        self.pixels = neopixel.NeoPixel(board.D18, 100)
 
     def do_work(self):
         """
@@ -57,18 +57,18 @@ class Worker(object):
             self.unit_of_work += 1
             # must call emit from the socket io
             # must specify the namespace
-            self.socketio.emit("update", {"msg": self.unit_of_work}, namespace="/work")
+            # self.socketio.emit("update", {"msg": self.unit_of_work}, namespace="/work")
             if self.mode == 0:
                self.pixels[self.unit_of_work] = (self.r,self.g,self.b)
             elif self.mode == 1:
                c = random.choice(colours)
-               for x in range(self.unit_of_work,(self.unit_of_work+10)):
-                 if x < 50:
+               for x in range(self.unit_of_work,(self.unit_of_work+5)):
+                 if x < 100:
                    self.pixels[x] = c
             else:
                self.pixels[self.unit_of_work] = 0
             # important to use eventlet's sleep method
-            if self.unit_of_work == 49:
+            if self.unit_of_work == 99:
               self.unit_of_work = 0
           eventlet.sleep(self.speed)
     def update_pattern(self,data):
@@ -143,4 +143,6 @@ if __name__ == '__main__':
     """
     launch server
     """
+    #worker = Worker(socketio)
+    #socketio.start_background_task(target=worker.do_work)
     socketio.run(app, host="0.0.0.0", port=5000, debug=True)
