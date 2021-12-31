@@ -24,6 +24,13 @@ def index():
     """
     return render_template('demo.html')
 
+@app.route('/leds/toggle')
+def index():
+    """
+    renders demo.html
+    """
+    zmqSocket.send_string("toggleenable:1")
+
 
 @socketio.on('connect', namespace='/work')
 def connect():

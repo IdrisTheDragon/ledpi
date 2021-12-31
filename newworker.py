@@ -1,4 +1,4 @@
-import time
+from typing import Text
 from rpi_ws281x import *
 from patterns import *
 
@@ -15,13 +15,17 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 mode = 3
+prevmode = -1
 colour = 0
 colours = [ Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(127, 127, 127) ]
 customColour = [0,0,0]
+toggleenable = 0
+
 
 def parse_update(message):
     global mode
     global colour
+    global toggleenable
     msg = message.split("\n")
     for m in msg:
         t = m.split(":")
@@ -36,6 +40,9 @@ def parse_update(message):
             customColour[1] = int(t[1])
         elif t[0] == 'b':
             customColour[2] = int(t[1])
+        if t[0] == "toggleenable":
+            toggleenable = int(t[1])
+            print(toggleenable)
 
 
  
@@ -65,8 +72,17 @@ if __name__ == '__main__':
             except zmq.ZMQError as e:
                 #print("no msg",e)
                 pass
-
-            if mode == 0:
+            if toggleenable == 1:
+                if mode == -1:
+                    mode = prevmode
+                else:
+                    prevmode = mode
+                    mode = -1
+                toggleenable = 0
+            
+            if mode == -1:
+                continue
+            elif mode == 0:
                 colorWipe(strip, colours[colour])
             elif mode == 1:
                 theaterChase(strip,colours[colour])
