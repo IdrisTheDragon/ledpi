@@ -14,35 +14,36 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-mode = 3
-prevmode = -1
-colour = 0
-colours = [ Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(127, 127, 127) ]
-customColour = [0,0,0]
-toggleenable = 0
+class ActiveSettings:
+    mode = 3
+    prevmode = -1
+    colour = 0
+    colours = [ Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(127, 127, 127) ]
+    customColour = [0,0,0]
+    toggleenable = 0
+    speed = 100
 
 
-def parse_update(message):
-    global mode
-    global colour
-    global toggleenable
-    msg = message.split("\n")
-    for m in msg:
-        t = m.split(":")
-        if t[0] == "mode":
-            mode = int(t[1])
-            print(mode)
-        elif t[0] == "color":
-            colour = int(t[1])
-        elif t[0] == 'r':
-            customColour[0] = int(t[1])
-        elif t[0] == 'g':
-            customColour[1] = int(t[1])
-        elif t[0] == 'b':
-            customColour[2] = int(t[1])
-        if t[0] == "toggleenable":
-            toggleenable = int(t[1])
-            print(toggleenable)
+    def parse_update(self,message):
+        msg = message.split("\n")
+        for m in msg:
+            t = m.split(":")
+            if t[0] == "mode":
+                self.mode = int(t[1])
+                print(self.mode)
+            elif t[0] == "color":
+                self.colour = int(t[1])
+            elif t[0] == "speed":
+                self.speed = int(t[1])
+            elif t[0] == 'r':
+                self.customColour[0] = int(t[1])
+            elif t[0] == 'g':
+                self.customColour[1] = int(t[1])
+            elif t[0] == 'b':
+                self.customColour[2] = int(t[1])
+            elif t[0] == "toggleenable":
+                self.toggleenable = int(t[1])
+                print(self.toggleenable)
 
 
  
@@ -61,39 +62,41 @@ if __name__ == '__main__':
  
     print ('Press Ctrl-C to quit.')
  
+    offset = 0
+    settings = ActiveSettings()
     try:
- 
         while True:
+            offest = offset + 1 if offset < 100 else 0
             try:
                 #print("getting msg")
                 message = socket.recv_string(flags=zmq.NOBLOCK)
                 print(message)
-                parse_update(message)
+                settings.parse_update(message)
             except zmq.ZMQError as e:
                 #print("no msg",e)
                 pass
-            if toggleenable == 1:
-                if mode == -1:
-                    mode = prevmode
+            if settings.toggleenable == 1:
+                if settings.mode == -1:
+                    settings.mode = settings.prevmode
                 else:
-                    prevmode = mode
-                    mode = -1
-                toggleenable = 0
+                    settings.prevmode = settings.mode
+                    settings.mode = -1
+                settings.toggleenable = 0
             
-            if mode == -1:
-                continue
-            elif mode == 0:
-                colorWipe(strip, colours[colour])
-            elif mode == 1:
-                theaterChase(strip,colours[colour])
-            elif mode == 2:
-                rainbow(strip)
-            elif mode == 3:
-                rainbowCycle(strip,wait_ms=100)
-            elif mode == 4:
-                theaterChaseRainbow(strip,wait_ms=100)
-            elif mode == 5:
-                colorWipe(strip, Color(customColour[0],customColour[1],customColour[2]))
+            if settings.mode == -1:
+                colorWipe(strip, Color(0,0,0))
+            elif settings.mode == 0:
+                colorWipe(strip, settings.colours[colour])
+            elif settings.mode == 1:
+                theaterChase(strip,settings.colours[colour])
+            elif settings.mode == 2:
+                rainbow(strip,offset=offset)
+            elif settings.mode == 3:
+                rainbowCycle(strip,wait_ms=100,offset=offset)
+            elif settings.mode == 4:
+                theaterChaseRainbow(strip,wait_ms=100,offset=offset)
+            elif settings.mode == 5:
+                colorWipe(strip, Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]))
  
     except KeyboardInterrupt:
         colorWipe(strip, Color(0,0,0), 10)
