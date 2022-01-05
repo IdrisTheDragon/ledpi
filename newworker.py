@@ -84,19 +84,19 @@ if __name__ == '__main__':
                 settings.toggleenable = 0
             
             if settings.mode == -1:
-                colorWipe(strip, Color(0,0,0))
+                colorWipe(strip, Color(0,0,0),wait_ms=10)
             elif settings.mode == 0:
-                colorWipe(strip, settings.colours[colour])
+                colorWipe(strip, settings.colours[colour],wait_ms=settings.speed)
             elif settings.mode == 1:
-                theaterChase(strip,settings.colours[colour])
+                theaterChase(strip,settings.colours[colour],wait_ms=settings.speed)
             elif settings.mode == 2:
                 rainbow(strip,offset=offset)
             elif settings.mode == 3:
-                rainbowCycle(strip,wait_ms=100,offset=offset)
+                rainbowCycle(strip,wait_ms=settings.speed,offset=offset)
             elif settings.mode == 4:
-                theaterChaseRainbow(strip,wait_ms=100,offset=offset)
+                theaterChaseRainbow(strip,wait_ms=settings.speed,offset=offset)
             elif settings.mode == 5:
-                colorWipe(strip, Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]))
+                colorWipe(strip, Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
  
     except KeyboardInterrupt:
-        colorWipe(strip, Color(0,0,0), 10)
+        colorWipe(strip, Color(0,0,0),wait_ms=10)
