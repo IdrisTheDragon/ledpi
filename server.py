@@ -25,7 +25,7 @@ def index():
     return render_template('demo.html')
 
 @app.route('/leds/toggle')
-def index():
+def toggleenable():
     """
     renders demo.html
     """
