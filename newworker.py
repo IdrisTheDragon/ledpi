@@ -99,10 +99,14 @@ if __name__ == '__main__':
             elif settings.mode == 5:
                 colorWipe(strip, Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
             elif settings.mode == 6:
-                hi(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
+                vline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
             elif settings.mode == 7:
                 hline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
- 
+            elif settings.mode == 8:
+                hi(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
+            elif settings.mode == 9:
+                scrollText(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
+         
  
     except KeyboardInterrupt:
         colorWipe(strip, Color(0,0,0),wait_ms=10)
