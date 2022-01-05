@@ -66,7 +66,7 @@ def hi(strip, color, wait_ms=100):
 def hi(strip, color, wait_ms=100,offset=0):
   for i in range(strip.numPixels()):
     coord = ledcoords[i]
-    if hi[coord[1]][19-coord[0]] == '1':
+    if hello[coord[1]][19-coord[0]] == '1':
       strip.setPixelColor(i, color)
     else:
       strip.setPixelColor(i, Color(0,0,0))
