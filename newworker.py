@@ -67,7 +67,7 @@ if __name__ == '__main__':
     settings = ActiveSettings()
     try:
         while True:
-            offest = offset + 1 if offset < 100 else 0
+            offset = offset + 1 if offset < 100 else 0
             try:
                 #print("getting msg")
                 message = socket.recv_string(flags=zmq.NOBLOCK)
@@ -99,9 +99,9 @@ if __name__ == '__main__':
             elif settings.mode == 5:
                 colorWipe(strip, Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
             elif settings.mode == 6:
-                vline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offest)
+                vline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
             elif settings.mode == 7:
-                hline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offest)
+                hline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
  
  
     except KeyboardInterrupt:
