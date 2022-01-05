@@ -86,9 +86,9 @@ if __name__ == '__main__':
             if settings.mode == -1:
                 colorWipe(strip, Color(0,0,0),wait_ms=10)
             elif settings.mode == 0:
-                colorWipe(strip, settings.colours[colour],wait_ms=settings.speed)
+                colorWipe(strip, settings.colours[settings.colour],wait_ms=settings.speed)
             elif settings.mode == 1:
-                theaterChase(strip,settings.colours[colour],wait_ms=settings.speed)
+                theaterChase(strip,settings.colours[settings.colour],wait_ms=settings.speed)
             elif settings.mode == 2:
                 rainbow(strip,offset=offset)
             elif settings.mode == 3:
