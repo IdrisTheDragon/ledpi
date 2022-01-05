@@ -5,7 +5,7 @@ from rpi_ws281x import *
 
 ledcoords = []
 
-for x in range(0,14):
+for x in range(0,16):
     for y in range(0,7):
         ledcoords.append([x,y])
 
