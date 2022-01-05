@@ -6,7 +6,7 @@ from rpi_ws281x import *
 ledcoords = []
 
 for x in range(0,14):
-    for y in range(0,17):
+    for y in range(0,7):
         ledcoords.append([x,y])
 
 assert(len(ledcoords)>99)
