@@ -13,7 +13,7 @@ def vline(strip, color, wait_ms=50,offset=0):
     """Wipe color across display a pixel at a time."""
     global ledcoords
     for i in range(strip.numPixels()):
-        if ledcoords[i][0] == offset:
+        if ledcoords[i][0] == offset%10:
             strip.setPixelColor(i, color)
         else:
             strip.setPixelColor(i, Color(0,0,0))
@@ -24,7 +24,7 @@ def hline(strip, color, wait_ms=50,offset=0):
     """Wipe color across display a pixel at a time."""
     global ledcoords
     for i in range(strip.numPixels()):
-        if ledcoords[i][1] == offset:
+        if ledcoords[i][1] == offset%10:
             strip.setPixelColor(i, color)
         else:
             strip.setPixelColor(i, Color(0,0,0))
