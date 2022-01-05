@@ -44,7 +44,7 @@ def connect():
 def update_pattern(data):
     # data['r']
 
-    zmqSocket.send_string(f"mode:{data['mode']}\ncolor:{data['colour']}\nr:{data['r']}\ng:{data['g']}\nb:{data['b']}")
+    zmqSocket.send_string(f"mode:{data['mode']}\ncolor:{data['colour']}\speed:{data['speed']}\nr:{data['r']}\ng:{data['g']}\nb:{data['b']}")
     print('updated with', data)
     emit("update", {"msg":"updated data"})
 
