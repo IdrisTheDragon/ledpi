@@ -5,9 +5,11 @@ from rpi_ws281x import *
 
 ledcoords = []
 
-for x in range(0,10):
-    for y in range(0,10):
+for x in range(0,14):
+    for y in range(0,17):
         ledcoords.append([x,y])
+
+assert(len(ledcoords)>99)
 
 def vline(strip, color, wait_ms=50,offset=0):
     """Wipe color across display a pixel at a time."""
