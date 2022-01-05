@@ -1,6 +1,7 @@
 from typing import Text
 from rpi_ws281x import *
 from patterns import *
+from d2patterns import *
 
 import zmq
 
@@ -97,6 +98,11 @@ if __name__ == '__main__':
                 theaterChaseRainbow(strip,wait_ms=settings.speed,offset=offset)
             elif settings.mode == 5:
                 colorWipe(strip, Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
+            elif settings.mode == 6:
+                vline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offest)
+            elif settings.mode == 7:
+                hline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offest)
+ 
  
     except KeyboardInterrupt:
         colorWipe(strip, Color(0,0,0),wait_ms=10)
