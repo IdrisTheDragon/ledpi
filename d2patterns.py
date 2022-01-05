@@ -1,6 +1,8 @@
 import time
 from rpi_ws281x import *
 
+from alpha import *
+
 
 
 ledcoords = []
@@ -28,6 +30,17 @@ hello = [
 '01001000100000000000',
 '01001011111000000000'
 ]
+
+text = [LH, LA, LP, LP, LY, LSP, LB, LI, LR, LT, LH, LD, LA, LY,LSP,LSP]
+
+finalText = []
+for i in range(5):
+    l = ''
+    for t in text:
+        l += t[i]
+    finalText.append(l)
+
+
 
 
 
@@ -76,7 +89,7 @@ def hi(strip, color, wait_ms=100,offset=0):
 def scrollText(strip, color, wait_ms=100,offset=0):
   for i in range(strip.numPixels()):
     coord = ledcoords[i]
-    if hello[coord[1]][(19-coord[0]+offset)%len(hello[0])] == '1':
+    if finalText[coord[1]][(19-coord[0]+offset)%len(finalText[0])] == '1':
       strip.setPixelColor(i, color)
     else:
       strip.setPixelColor(i, Color(0,0,0))
