@@ -21,7 +21,7 @@ for y in range(0,5):
   print(l)
 print(']')
 
-hi = [
+hello = [
 '01001011111000000000',
 '01001000100000000000',
 '01111000100000000000',
@@ -76,7 +76,7 @@ def hi(strip, color, wait_ms=100,offset=0):
 def scrollText(strip, color, wait_ms=100,offset=0):
   for i in range(strip.numPixels()):
     coord = ledcoords[i]
-    if hi[coord[1]][(19-coord[0]+offset)%len(hi[0])] == '1':
+    if hello[coord[1]][(19-coord[0]+offset)%len(hello[0])] == '1':
       strip.setPixelColor(i, color)
     else:
       strip.setPixelColor(i, Color(0,0,0))
