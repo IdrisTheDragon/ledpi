@@ -40,6 +40,7 @@ for i in range(5):
         l += t[i]
     finalText.append(l)
 
+print(finalText)
 
 
 
