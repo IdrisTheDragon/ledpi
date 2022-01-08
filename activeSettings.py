@@ -1,4 +1,5 @@
 from rpi_ws281x import Color
+from d2patterns import strToTextArray
 
 class ActiveSettings:
     mode = 3
@@ -9,6 +10,8 @@ class ActiveSettings:
     customColor = Color(0,0,0)
     toggleenable = 0
     speed = 100
+    customtext = 'Hello World'
+    customTextArray = strToTextArray(customtext)
 
     def parse_update(self,message):
         msg = message.split("\n")
@@ -33,4 +36,7 @@ class ActiveSettings:
             elif t[0] == "toggleenable":
                 self.toggleenable = int(t[1])
                 print(self.toggleenable)
+            elif t[0] == 'customtext':
+                self.customtext = t[1]
+                self.customTextArray = strToTextArray(self.customtext)
 

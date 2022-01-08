@@ -48,12 +48,13 @@
                     var colour = $("input[name=colour]")['0'].value;
                     var value = $("input[name='colori']")['0'].value;
                     var speed = $("input[name='speed']")['0'].value;
+                    var customtext = $("input[name='customtext']")['0'].value;
                     // #XXXXXX -> ["XX", "XX", "XX"]
                     value = value.match(/[A-Za-z0-9]{2}/g);
 
                     // ["XX", "XX", "XX"] -> [n, n, n]
                     value = value.map(function(v) { return parseInt(v, 16) });
-                    socketio.emit("update", {'r':value[0],'g':value[1],'b':value[2],'mode':mode,'colour':colour, 'speed':speed});
+                    socketio.emit("update", {'r':value[0],'g':value[1],'b':value[2],'mode':mode,'colour':colour, 'speed':speed,'customtext':customtext});
                 });
 
 
@@ -88,7 +89,10 @@
                          <label class="form-label">Custom Colour(mode 5)</label>
                         <input class="form-control" type="color" name="colori" value="#000000" />
                     </div>
-                       
+                    <div class="mb-3">
+                        <label class="form-label">Custom Text(mode 8)</label>
+                       <input class="form-control" type="text" name="customtext" value="Hello World" />
+                   </div> 
                     <input type="button" name="update" value="update" />
               
                  </form>

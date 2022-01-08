@@ -54,9 +54,9 @@ def strToTextArray(input):
       letterArray.append(letters[ord(l.lower())-97])
     elif l == ' ':
       letterArray.append(LSP)
+  letterArray.append(LSP)
+  letterArray.append(LSP)
   return letterArrayToTextArray(letterArray)
-
-finalText = strToTextArray("I Love you")
 
 
 class Vline(Pattern):
@@ -104,7 +104,7 @@ class ScrollText(Pattern):
 
     for i in range(self.strip.numPixels()):
       coord = ledcoords[i]
-      if finalText[coord[1]][(19-coord[0]+self.counter)%len(finalText[0])] == '1':
+      if self.settings.customTextArray[coord[1]][(19-coord[0]+self.counter)%len(self.settings.customTextArray[0])] == '1':
         self.strip.setPixelColor(i, self.settings.customColor)
       else:
         self.strip.setPixelColor(i, Color(0,0,0))
