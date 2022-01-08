@@ -31,7 +31,9 @@ hello = [
 '01001011111000000000'
 ]
 
-text = [LH, LA, LP, LP, LY, LSP, LB, LI, LR, LT, LH, LD, LA, LY,LSP,LSP]
+birthday = [LH, LA, LP, LP, LY, LSP, LB, LI, LR, LT, LH, LD, LA, LY,LSP,LSP]
+letters = [LA,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ]
+text = letters
 
 finalText = []
 for i in range(5):
