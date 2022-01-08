@@ -1,5 +1,5 @@
 from rpi_ws281x import Color
-from d2patterns import strToTextArray
+from alpha import strToTextArray
 
 class ActiveSettings:
     mode = 3

@@ -215,3 +215,27 @@ LZ = [
 '0010000',
 '0111110'
 ]
+
+
+letters = [LA,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ]
+
+def letterArrayToTextArray(letterArray):
+  finalText = []
+  for i in range(5):
+      l = ''
+      for t in letterArray:
+          l += t[i]
+      finalText.append(l)
+  finalText.reverse()
+  return finalText
+
+def strToTextArray(input):
+  letterArray = []
+  for l in input:
+    if l.isalpha():
+      letterArray.append(letters[ord(l.lower())-97])
+    elif l == ' ':
+      letterArray.append(LSP)
+  letterArray.append(LSP)
+  letterArray.append(LSP)
+  return letterArrayToTextArray(letterArray)
