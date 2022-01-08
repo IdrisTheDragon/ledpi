@@ -43,7 +43,7 @@ def connect():
 @socketio.on('get_settings', namespace='/work')
 def get_settings(data):
     emit("update", {"msg":settingsdata})
-    emit("settings", {"msg":data})
+    emit("settings", {"msg":settingsdata})
 
 @socketio.on('update', namespace='/work')
 def update_pattern(data):
@@ -52,6 +52,7 @@ def update_pattern(data):
     zmqSocket.send_string(f"mode:{data['mode']}\nspeed:{data['speed']}\nr:{data['r']}\ng:{data['g']}\nb:{data['b']}\ncustomtext:{data['customtext']}")
     print('updated with', data)
     settingsdata = data
+    settingsdata['nodata'] = False
     emit("update", {"msg":data})
     emit("settings", {"msg":data})
 
