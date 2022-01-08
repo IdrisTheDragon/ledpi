@@ -53,9 +53,12 @@
                     $(".report").append(msg.msg.mode + " " + msg.msg.nodata + "<br />");
                 });
                 socketio.on("settings", function(msg) {
+                    console.log("here")
+                    console.log(msg.msg.nodata)
+                    console.log(msg.msg.mode)
                     if (msg.msg.nodata != 'true'){
-                        $("input[name='mode']")['0'].value = msg.msg.mode;
-                        $("input[name='speed']")['0'].value = msg.msg.speed;
+                        $("input[name='mode']")['0'].value = parseInt(msg.msg.mode);
+                        $("input[name='speed']")['0'].value = pasreInt(msg.msg.speed);
                         $("input[name='customtext']")['0'].value = msg.msg.customtext;
 
                         hex = rgbToHex(parseInt(msg.msg.r), parseInt(msg.msg.g), parseInt(msg.msg.b));
