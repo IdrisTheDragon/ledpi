@@ -15,7 +15,7 @@ zmqContext = zmq.Context()
 zmqSocket = zmqContext.socket(zmq.PUSH)
 zmqSocket.connect("tcp://localhost:5555")
 
-settingsdata = {}
+settingsdata = {'nodata':True}
 
 
 @app.route('/')

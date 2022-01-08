@@ -28,6 +28,7 @@
 
         <script type="text/javascript" charset="utf-8">
 
+
             $(document).ready(function() {
 
                 var socketio = null;
@@ -38,9 +39,10 @@
 
                 socketio.off().on("re_connect", function(msg) {
                     $(".report").append(msg.msg + "<br />");
+                    socketio.emit("get_settings",{});
                 });
                 socketio.on("update", function(msg) {
-                    $(".report").append(msg.msg.mode + "<br />");
+                    $(".report").append(msg.msg.mode + " " + msg.msg.nodata "<br />");
                 });
 
                 $("input[name='update']").on("click", function() {
@@ -55,8 +57,6 @@
                     value = value.map(function(v) { return parseInt(v, 16) });
                     socketio.emit("update", {'r':value[0],'g':value[1],'b':value[2],'mode':mode, 'speed':speed,'customtext':customtext});
                 });
-
-
             });
 
         </script>
@@ -89,6 +89,7 @@
                        <input class="form-control" type="text" name="customtext" value="Hello World" />
                    </div> 
                     <input type="button" name="update" value="update" />
+                    
               
                  </form>
             </div>
