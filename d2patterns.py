@@ -2,6 +2,7 @@ import time
 from rpi_ws281x import *
 
 from alpha import *
+from patterns import Pattern
 
 
 
@@ -33,68 +34,77 @@ hello = [
 
 birthday = [LH, LA, LP, LP, LY, LSP, LB, LI, LR, LT, LH, LD, LA, LY,LSP,LSP]
 letters = [LA,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ]
-text = letters
 
-finalText = []
-for i in range(5):
-    l = ''
-    for t in text:
-        l += t[i]
-    finalText.append(l)
-finalText.reverse()
-print(finalText)
+def letterArrayToTextArray(letterArray):
+  finalText = []
+  for i in range(5):
+      l = ''
+      for t in letterArray:
+          l += t[i]
+      finalText.append(l)
+  finalText.reverse()
+  return finalText
+
+def strToTextArray(input):
+  letterArray = []
+  for l in input:
+    if l.isalpha():
+      letterArray.append(letters[97 - ord(l.lower())])
+    elif l == ' ':
+      letterArray.append(LSP)
+  return letterArrayToTextArray(letterArray)
+
+finalText = strToTextArray("I Love you")
 
 
+class Vline(Pattern):
 
+  counter = -1
+  counterMax = 20
 
-def vline(strip, color, wait_ms=50,offset=0):
-    """Wipe color across display a pixel at a time."""
+  def step(self):
+      """Wipe color across display a pixel at a time."""
+
+      self.counter = (self.counter+1)%self.counterMax
+      global ledcoords
+      for i in range(self.strip.numPixels()):
+          if ledcoords[i][0] == self.counter:
+              self.strip.setPixelColor(i, color)
+          else:
+              self.strip.setPixelColor(i, Color(0,0,0))
+      self.strip.show()
+      time.sleep(self.settings.speed/1000.0)
+
+class Hline(Pattern):
+
+  counter = -1
+  counterMax = 5
+
+  def step(self):
+    self.counter = (self.counter+1)%self.counterMax
     global ledcoords
-    for i in range(strip.numPixels()):
-        if ledcoords[i][0] == offset%20:
-            strip.setPixelColor(i, color)
+    for i in range(self.strip.numPixels()):
+        if ledcoords[i][1] == self.counter:
+            self.strip.setPixelColor(i, color)
         else:
-            strip.setPixelColor(i, Color(0,0,0))
-    strip.show()
-    time.sleep(wait_ms/1000.0)
+            self.strip.setPixelColor(i, Color(0,0,0))
+    self.strip.show()
+    time.sleep(self.settings.speed/1000.0)
 
-def hline(strip, color, wait_ms=50,offset=0):
-    """Wipe color across display a pixel at a time."""
-    global ledcoords
-    for i in range(strip.numPixels()):
-        if ledcoords[i][1] == offset%5:
-            strip.setPixelColor(i, color)
-        else:
-            strip.setPixelColor(i, Color(0,0,0))
-    strip.show()
-    time.sleep(wait_ms/1000.0)
 
-def hi(strip, color, wait_ms=100):
-  for i in range(strip.numPixels()):
-    coord = ledcoords[i]
-    if pattern[coord[1]][19-coord[0]] == '1':
-      strip.setPixelColor(i, color)
-    else:
-      strip.setPixelColor(i, Color(0,0,0))
-  strip.show()
-  time.sleep(wait_ms/1000.0)
 
-def hi(strip, color, wait_ms=100,offset=0):
-  for i in range(strip.numPixels()):
-    coord = ledcoords[i]
-    if hello[coord[1]][19-coord[0]] == '1':
-      strip.setPixelColor(i, color)
-    else:
-      strip.setPixelColor(i, Color(0,0,0))
-  strip.show()
-  time.sleep(wait_ms/1000.0)
+class ScrollText(Pattern):
+  counter = -1
+  counterMax = 500
 
-def scrollText(strip, color, wait_ms=100,offset=0):
-  for i in range(strip.numPixels()):
-    coord = ledcoords[i]
-    if finalText[coord[1]][(19-coord[0]+offset)%len(finalText[0])] == '1':
-      strip.setPixelColor(i, color)
-    else:
-      strip.setPixelColor(i, Color(0,0,0))
-  strip.show()
-  time.sleep(wait_ms/1000.0)
+  def step(self):
+    self.counter = (self.counter+1)%self.counterMax
+
+    for i in range(self.strip.numPixels()):
+      coord = ledcoords[i]
+      if finalText[coord[1]][(19-coord[0]+self.counter)%len(finalText[0])] == '1':
+        self.strip.setPixelColor(i, color)
+      else:
+        self.strip.setPixelColor(i, Color(0,0,0))
+    self.strip.show()
+    time.sleep(self.settings.speed/1000.0)

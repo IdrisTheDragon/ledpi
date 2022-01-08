@@ -41,7 +41,10 @@ if __name__ == '__main__':
         Rainbow(),
         RainbowCycle(),
         TheaterChaseRainbow(),
-        ColorWipe(customColor=True)
+        ColorWipe(customColor=True),
+        Vline(),
+        Hline(),
+        ScrollText(),
     ]
     for p in patterns:
         p.setup(strip,settings)
@@ -67,15 +70,6 @@ if __name__ == '__main__':
 
             if -1 <= settings.mode <= len(patterns)-2:
                 patterns[settings.mode+1].step()
-            elif settings.mode == 6:
-                vline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
-            elif settings.mode == 7:
-                hline(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
-            elif settings.mode == 8:
-                hi(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed)
-            elif settings.mode == 9:
-                scrollText(strip,Color(settings.customColour[0],settings.customColour[1],settings.customColour[2]),wait_ms=settings.speed,offset=offset)
-         
  
     except KeyboardInterrupt:
         patterns[0].step()
