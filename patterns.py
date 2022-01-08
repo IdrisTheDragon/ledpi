@@ -1,6 +1,6 @@
 import time
 from activeSettings import ActiveSettings
-from rpi_ws281x import Color, Adafruit_NeoPixel
+from rpi_ws281x import Color
 
 class Pattern:
     def setup(self,strip,settings:ActiveSettings) -> None:
@@ -35,7 +35,7 @@ class ColorWipe(Pattern):
         """Wipe color across display a pixel at a time."""
         self.counter = (self.counter+1)%self.counterMax
         if self.customColor:
-            self.strip.setPixelColor(self.counter,Color(self.settings.customColour[0],self.settings.customColour[1],self.settings.customColour[2]))
+            self.strip.setPixelColor(self.counter,self.settings.customColor)
         else:
             self.strip.setPixelColor(self.counter, self.settings.color)
         self.strip.show()
