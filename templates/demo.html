@@ -40,7 +40,7 @@
                     $(".report").append(msg.msg + "<br />");
                 });
                 socketio.on("update", function(msg) {
-                    $(".report").append(msg.msg + "<br />");
+                    $(".report").append(msg.msg.mode + "<br />");
                 });
 
                 $("input[name='update']").on("click", function() {

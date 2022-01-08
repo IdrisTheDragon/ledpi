@@ -15,6 +15,7 @@ zmqContext = zmq.Context()
 zmqSocket = zmqContext.socket(zmq.PUSH)
 zmqSocket.connect("tcp://localhost:5555")
 
+settingsdata = {}
 
 
 @app.route('/')
@@ -39,13 +40,17 @@ def connect():
     """
     emit("re_connect", {"msg": "connected"})
 
+@socketio.on('get_settings', namespace='/work')
+def get_settings(data):
+    emit("update", {"msg":settingsdata})
 
 @socketio.on('update', namespace='/work')
 def update_pattern(data):
     # data['r']
-
+    global settingsdata
     zmqSocket.send_string(f"mode:{data['mode']}\nspeed:{data['speed']}\nr:{data['r']}\ng:{data['g']}\nb:{data['b']}\ncustomtext:{data['customtext']}")
     print('updated with', data)
+    settingsdata = data
     emit("update", {"msg":data})
 
 
