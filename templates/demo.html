@@ -42,7 +42,7 @@
                     socketio.emit("get_settings",{});
                 });
                 socketio.on("update", function(msg) {
-                    $(".report").append(msg.msg.mode + " " + msg.msg.nodata "<br />");
+                    $(".report").append(msg.msg.mode + " " + msg.msg.nodata + "<br />");
                 });
 
                 $("input[name='update']").on("click", function() {
