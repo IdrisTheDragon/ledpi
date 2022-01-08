@@ -53,7 +53,7 @@
                     $(".report").append(msg.msg.mode + " " + msg.msg.nodata + "<br />");
                 });
                 socketio.on("settings", function(msg) {
-                    if (msg.msg.mode != 'true'){
+                    if (msg.msg.nodata != 'true'){
                         $("input[name='mode']")['0'].value = msg.msg.mode;
                         $("input[name='speed']")['0'].value = msg.msg.speed;
                         $("input[name='customtext']")['0'].value = msg.msg.customtext;
