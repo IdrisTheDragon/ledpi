@@ -56,7 +56,7 @@
                     console.log("here")
                     console.log(msg.msg.nodata)
                     console.log(msg.msg.mode)
-                    if (msg.msg.nodata != 'true'){
+                    if (msg.msg.nodata){
                         $("input[name='mode']")['0'].value = parseInt(msg.msg.mode);
                         $("input[name='speed']")['0'].value = parseInt(msg.msg.speed);
                         $("input[name='customtext']")['0'].value = msg.msg.customtext;
