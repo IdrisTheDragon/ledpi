@@ -39,7 +39,7 @@ for i in range(5):
     for t in text:
         l += t[i]
     finalText.append(l)
-
+finalText.reverse()
 print(finalText)
 
 
