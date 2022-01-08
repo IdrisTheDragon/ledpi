@@ -43,6 +43,7 @@ def connect():
 @socketio.on('get_settings', namespace='/work')
 def get_settings(data):
     emit("update", {"msg":settingsdata})
+    emit("settings", {"msg":data})
 
 @socketio.on('update', namespace='/work')
 def update_pattern(data):
@@ -52,6 +53,7 @@ def update_pattern(data):
     print('updated with', data)
     settingsdata = data
     emit("update", {"msg":data})
+    emit("settings", {"msg":data})
 
 
 if __name__ == '__main__':

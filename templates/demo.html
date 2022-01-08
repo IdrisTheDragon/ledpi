@@ -28,6 +28,14 @@
 
         <script type="text/javascript" charset="utf-8">
 
+            function componentToHex(c) {
+            var hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+            }
+
+            function rgbToHex(r, g, b) {
+                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            }
 
             $(document).ready(function() {
 
@@ -43,6 +51,17 @@
                 });
                 socketio.on("update", function(msg) {
                     $(".report").append(msg.msg.mode + " " + msg.msg.nodata + "<br />");
+                });
+                socketio.on("settings", function(msg) {
+                    if (msg.msg.mode != 'true'){
+                        $("input[name='mode']")['0'].value = msg.msg.mode;
+                        $("input[name='speed']")['0'].value = msg.msg.speed;
+                        $("input[name='customtext']")['0'].value = msg.msg.customtext;
+
+                        hex = rgbToHex(msg.msg.r, msg.msg.g, msg.msg.b);
+                        $("input[name='colori']")['0'].value = hex;
+
+                    }
                 });
 
                 $("input[name='update']").on("click", function() {
