@@ -43,7 +43,7 @@ def connect():
 @socketio.on('get_settings', namespace='/work')
 def get_settings(data):
     emit("update", {"msg":settingsdata})
-    emit("settings", {"msg":settingsdata})
+    emit("settings", {"msg":settingsdata}, broadcast=True)
 
 @socketio.on('update', namespace='/work')
 def update_pattern(data):
@@ -54,13 +54,11 @@ def update_pattern(data):
     settingsdata = data
     settingsdata['nodata'] = False
     emit("update", {"msg":data})
-    emit("settings", {"msg":data})
+    emit("settings", {"msg":data}, broadcast=True)
 
 
 if __name__ == '__main__':
     """
     launch server
     """
-    #worker = Worker(socketio)
-    #socketio.start_background_task(target=worker.do_work)
     socketio.run(app, host="0.0.0.0", port=5000, debug=True)
