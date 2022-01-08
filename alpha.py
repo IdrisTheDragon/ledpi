@@ -6,6 +6,22 @@ LSP = [
 '0000000'
 ]
 
+LQM = [
+'0111110',
+'0100010',
+'0001100',
+'0000000',
+'0001000'   
+]
+
+LPP = [
+'0011100',
+'0011100',
+'0011100',
+'0011100',
+'0011100'   
+]
+
 LA = [
 '011110',
 '010010',
@@ -216,9 +232,89 @@ LZ = [
 '0111110'
 ]
 
+L0 = [
+'0111110',
+'0100010',
+'0100010',
+'0100010',
+'0111110'
+]
+
+L1 = [
+'0011000',
+'0101000',
+'0001000',
+'0001000',
+'0111110'
+]
+
+L2 = [
+'001100',
+'010010',
+'000100',
+'001000',
+'011110'
+]
+
+L3 = [
+'001100',
+'000010',
+'001100',
+'000010',
+'001100'
+]
+
+L4 = [
+'010010',
+'010010',
+'011110',
+'000010',
+'000010'
+]
+
+L5 = [
+'011110',
+'010000',
+'011100',
+'000010',
+'001100'
+]
+
+L6 = [
+'011000',
+'010000',
+'011100',
+'010010',
+'011100'
+]
+
+L7 = [
+'011110',
+'000100',
+'000100',
+'001000',
+'001000'
+]
+
+L8 = [
+'011110',
+'010010',
+'011110',
+'010010',
+'011110'
+]
+
+L9 = [
+'011110',
+'010010',
+'011110',
+'000010',
+'011100'
+]
+
 
 letters = [LA,LB,LC,LD,LE,LF,LG,LH,LI,LJ,LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ]
-
+numbers = [L0,L1,L2,L3,L4,L5,L6,L7,L8,L9]
 def letterArrayToTextArray(letterArray):
   finalText = []
   for i in range(5):
@@ -234,8 +330,14 @@ def strToTextArray(input):
   for l in input:
     if l.isalpha():
       letterArray.append(letters[ord(l.lower())-97])
+    elif l.isnumeric():
+        letterArray.append(numbers[int(l)])
     elif l == ' ':
       letterArray.append(LSP)
+    elif l == '?':
+        letterArray.append(LQM)
+    elif l == '|':
+        letterArray.append(LPP)
   letterArray.append(LSP)
   letterArray.append(LSP)
   return letterArrayToTextArray(letterArray)
