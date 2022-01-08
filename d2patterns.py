@@ -45,11 +45,13 @@ def letterArrayToTextArray(letterArray):
   finalText.reverse()
   return finalText
 
+assert(97-ord('a')==0)
+
 def strToTextArray(input):
   letterArray = []
   for l in input:
     if l.isalpha():
-      letterArray.append(letters[97 - ord(l.lower())])
+      letterArray.append(letters[ord(l.lower())-97])
     elif l == ' ':
       letterArray.append(LSP)
   return letterArrayToTextArray(letterArray)
