@@ -4,8 +4,6 @@ from alpha import strToTextArray
 class ActiveSettings:
     mode = 3
     prevmode = -1
-    colour = 0
-    colours = [ Color(255, 0, 0), Color(0, 255, 0), Color(0, 0, 255), Color(127, 127, 127) ]
     customColour = [0,0,0]
     customColor = Color(0,0,0)
     toggleenable = 0
@@ -20,8 +18,6 @@ class ActiveSettings:
             if t[0] == "mode":
                 self.mode = int(t[1])
                 print(self.mode)
-            elif t[0] == "color":
-                self.colour = int(t[1])
             elif t[0] == "speed":
                 self.speed = int(t[1])
             elif t[0] == 'r':

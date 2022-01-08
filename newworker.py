@@ -41,7 +41,6 @@ if __name__ == '__main__':
         Rainbow(),
         RainbowCycle(),
         TheaterChaseRainbow(),
-        ColorWipe(customColor=True),
         Vline(),
         Hline(),
         ScrollText(),

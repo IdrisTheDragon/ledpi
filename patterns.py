@@ -21,10 +21,6 @@ class SetColor(Pattern):
 
 class ColorWipe(Pattern):
 
-    def __init__(self,customColor=False) -> None:
-        self.customColor = customColor
-        super().__init__()
-
     counter = -1
 
     def setup(self, strip, settings: ActiveSettings) -> None:
@@ -34,10 +30,7 @@ class ColorWipe(Pattern):
     def step(self):
         """Wipe color across display a pixel at a time."""
         self.counter = (self.counter+1)%self.counterMax
-        if self.customColor:
-            self.strip.setPixelColor(self.counter,self.settings.customColor)
-        else:
-            self.strip.setPixelColor(self.counter, self.settings.color)
+        self.strip.setPixelColor(self.counter,self.settings.customColor)
         self.strip.show()
         time.sleep(self.settings.speed/1000.0)
 
