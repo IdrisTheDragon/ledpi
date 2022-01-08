@@ -10,7 +10,7 @@ ledcoords = []
 for x in range(0,20):
     for y in range(0,5):
         ledcoords.append([x,(y if x%2 == 0 else 4-y)])
-print(ledcoords)
+#print(ledcoords)
 assert(len(ledcoords)>99)
 assert(len(ledcoords)<120)
 
